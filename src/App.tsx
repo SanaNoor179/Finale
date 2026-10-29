@@ -302,6 +302,12 @@ export default function App() {
               Library
             </button>
             <button 
+              onClick={() => navigateTo('results')} 
+              className={`transition cursor-pointer px-3 py-1.5 rounded-full ${currentPage === 'results' ? 'bg-[#111111] text-[#F5F4EF]' : 'text-[#777777] hover:text-[#111111]'}`}
+            >
+              Results
+            </button>
+            <button 
               onClick={() => navigateTo('about')} 
               className={`transition cursor-pointer px-3 py-1.5 rounded-full ${currentPage === 'about' ? 'bg-[#111111] text-[#F5F4EF]' : 'text-[#777777] hover:text-[#111111]'}`}
             >
@@ -358,17 +364,15 @@ export default function App() {
             >
               Image Library &amp; Gallery
             </button>
-            {userResponses.length > 0 && (
-              <button
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  navigateTo('results');
-                }}
-                className="block w-full text-left py-2 text-xs font-semibold tracking-widest uppercase text-[#111111] hover:text-[#2A4365]"
-              >
-                Your Results &amp; Stats
-              </button>
-            )}
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                navigateTo('results');
+              }}
+              className="block w-full text-left py-2 text-xs font-semibold tracking-widest uppercase text-[#111111] hover:text-[#2A4365]"
+            >
+              Results
+            </button>
             <button
               onClick={() => {
                 setMobileMenuOpen(false);
@@ -790,9 +794,6 @@ export default function App() {
             
             {/* HERO SCORE BANNER */}
             <div className="text-center space-y-4 border-b border-[#D9D9D4] pb-8">
-              <span className="text-xs font-semibold uppercase tracking-widest text-[#2A4365] border border-[#2A4365]/20 bg-[#2A4365]/5 px-3 py-1 rounded-full">
-                15-Round Analysis Complete
-              </span>
               <BlurText
                 text="YOUR RESULTS"
                 effect="blur"
@@ -803,7 +804,7 @@ export default function App() {
                 stepDuration={0.35}
                 blur={10}
                 distance={20}
-                className="text-4xl sm:text-5xl font-light text-[#111111] tracking-tight block"
+                className="text-4xl sm:text-5xl font-bold text-[#111111] tracking-tight block"
               />
               <div className="inline-block bg-white border border-[#D9D9D4] px-10 py-6 rounded-2xl shadow-xs">
                 <span className="text-6xl sm:text-7xl font-bold text-[#111111] tracking-tight">
@@ -939,16 +940,6 @@ export default function App() {
               </div>
             </div>
 
-            {/* Thought-Provoking Research Quote */}
-            <div className="bg-[#111111] text-[#F5F4EF] p-8 md:p-10 rounded-2xl space-y-3 relative overflow-hidden">
-              <span className="text-[10px] font-mono uppercase tracking-widest text-[#D9D9D4]/60">EXPERIMENTAL SUMMARY</span>
-              <blockquote className="text-2xl sm:text-3xl font-serif italic text-[#F5F4EF] leading-snug">
-                “Sometimes we respond to the work before we know who made it.”
-              </blockquote>
-              <p className="text-xs sm:text-sm text-[#D9D9D4]/80 leading-relaxed max-w-2xl">
-                This experiment explores how authorship, visual quality, micro-details, texture grain, and perceived effort shape audience response to modern creative output.
-              </p>
-            </div>
 
             {/* ACTION BUTTONS */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
@@ -999,14 +990,14 @@ export default function App() {
 
         {/* -------------------- 5. SCREEN: ABOUT -------------------- */}
         {currentPage === 'about' && (
-          <div className="w-full flex-grow h-[calc(100vh-8rem)] min-h-[580px] animate-fadeIn flex items-center overflow-hidden">
+          <div className="w-full flex-grow min-h-[580px] lg:h-[calc(100vh-8rem)] animate-fadeIn flex items-center overflow-visible pb-16 sm:pb-20 lg:pb-0">
             <div className="w-full h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
               
               {/* LEFT SIDE: INFINITE SPIRAL (ELONGATED FROM TOP TO BOTTOM EDGE) */}
               <div className="lg:col-span-5 w-full h-full flex justify-start items-center lg:-ml-6 xl:-ml-12 overflow-hidden">
                 <div 
-                  className="w-full max-w-[460px] h-full"
-                  style={{ height: 'calc(100vh - 8rem)', minHeight: '580px', position: 'relative', overflow: 'hidden' }}
+                  className="w-full max-w-[460px] h-[340px] sm:h-[420px] lg:h-full relative overflow-hidden"
+                  style={{ minHeight: '320px' }}
                 >
                   <InfiniteSpiral
                     items={spiralImages}
@@ -1027,7 +1018,7 @@ export default function App() {
               </div>
 
               {/* RIGHT SIDE: TEXT LIFTED UP, TIGHT LABEL GAP, 3-LINE HEADING, SINGLE COMBINED PARAGRAPH */}
-              <div className="lg:col-span-7 space-y-6 w-full max-w-3xl lg:-mt-14 xl:-mt-20">
+              <div className="lg:col-span-7 space-y-6 w-full max-w-3xl lg:-mt-14 xl:-mt-20 pb-10 sm:pb-12 lg:pb-0">
                 
                 {/* Header Group: Label and Heading with tight vertical distance */}
                 <div className="space-y-2">
@@ -1062,7 +1053,7 @@ export default function App() {
                 </div>
 
                 {/* Single Combined Info Paragraph */}
-                <div className="pt-1 max-w-2xl lg:max-w-[680px]">
+                <div className="pt-1 max-w-2xl lg:max-w-[680px] mb-4 sm:mb-6 lg:mb-0">
                   <BlurText
                     text="As synthetic generation tools rapidly advance, distinguishing between human craftsmanship and algorithmic synthesis challenges our intuitive assumptions about art, authenticity, and visual effort. Across 15 rounds of increasing complexity, this test evaluates whether subtle micro-details, light diffusion, stroke chaos, and texture grain impact your ability to discern genuine human authorial intent."
                     effect="blur"
@@ -1248,9 +1239,8 @@ export default function App() {
 
       {/* Global Minimalist Footer matching reference design */}
       <footer className="border-t border-[#D9D9D4] py-6 px-6 sm:px-12 mt-auto bg-transparent">
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-[#777777]">
+        <div className="max-w-6xl mx-auto flex items-center justify-center sm:justify-start text-xs text-[#777777]">
           <span>HUMAN OR AI? — Interactive Visual Experiment</span>
-          <span>Interactive Design Prototype</span>
         </div>
       </footer>
 
